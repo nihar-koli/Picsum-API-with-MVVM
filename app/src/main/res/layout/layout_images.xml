@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:id="@+id/parentLayout"
+    android:background="@android:color/background_dark">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@android:color/holo_purple"
+        android:id="@+id/image"
+        android:outlineAmbientShadowColor="@android:color/background_dark"
+        android:outlineSpotShadowColor="@android:color/background_dark"/>
+
+</RelativeLayout>
