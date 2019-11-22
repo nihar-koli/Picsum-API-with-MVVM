@@ -85,12 +85,7 @@ public class MainActivity extends AppCompatActivity{
         mMainActivityViewModel.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(aBoolean){
-                    showProgressBar();
-                }else{
-                    hideProgressBar();
-                    recyclerViewAdapter.notifyDataSetChanged();
-                }
+                recyclerViewAdapter.notifyDataSetChanged();
             }
         });
 
@@ -104,13 +99,5 @@ public class MainActivity extends AppCompatActivity{
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(recyclerViewAdapter);
-    }
-
-    public void hideProgressBar(){
-        progressBar.setVisibility(View.GONE);
-    }
-
-    public void showProgressBar(){
-        progressBar.setVisibility(View.VISIBLE);
     }
 }
