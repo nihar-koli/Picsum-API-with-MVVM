@@ -68,23 +68,17 @@ public class MainActivity extends AppCompatActivity{
 
                 if (!recyclerView.canScrollVertically(1)) {
                     Toast.makeText(MainActivity.this, "Next Page :-", Toast.LENGTH_LONG).show();
-                    mMainActivityViewModel.loadMore();
+                    mMainActivityViewModel.loadMore();    //paging by using picsum api...
                 }
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
             }
         });
 
         mMainActivityViewModel.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                recyclerViewAdapter.notifyDataSetChanged();
+                recyclerViewAdapter.notifyDataSetChanged(); //updating contents in recycler view
             }
         });
-
 
     }
 
