@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setTitle("Picsum");
+        setTitle("Picsum Wallpapers");
         Log.d(TAG, "onCreate: started");
 
         progressBar = findViewById(R.id.progressBar);
@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity{
                 }else{
                     hideProgressBar();
                     recyclerViewAdapter.notifyDataSetChanged();
-                    //recyclerView.smoothScrollToPosition(mMainActivityViewModel.getShowImages().getValue().size()-1);
                 }
             }
         });
