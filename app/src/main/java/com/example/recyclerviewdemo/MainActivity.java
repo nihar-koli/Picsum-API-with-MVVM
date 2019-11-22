@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity{
 
                 if (!recyclerView.canScrollVertically(1)) {
                     page++;
-                    Toast.makeText(MainActivity.this, "Page "+page+" :-", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Next Page :-", Toast.LENGTH_LONG).show();
                     mMainActivityViewModel.loadMore();
                 }
             }
