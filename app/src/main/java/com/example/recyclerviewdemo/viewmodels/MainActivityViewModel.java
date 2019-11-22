@@ -1,5 +1,7 @@
 package com.example.recyclerviewdemo.viewmodels;
 
+import android.os.AsyncTask;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,6 +14,7 @@ import java.util.List;
 public class MainActivityViewModel extends ViewModel {
 
     private MutableLiveData<List<ShowImage>> mShowImages;
+    private MutableLiveData<List<ShowImage>> currentImages;
     private ShowImagesRepository mRepo;
     private MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
 
@@ -23,10 +26,14 @@ public class MainActivityViewModel extends ViewModel {
         mShowImages = mRepo.getShowImagesList();
     }
 
+
+
     public void loadMore(){
         mIsUpdating.setValue(true);
         mRepo = ShowImagesRepository.getInstance();
-        mShowImages = mRepo.getShowImagesList();
+        currentImages = mRepo.getShowImagesList();
+        mShowImages = currentImages;
+        mIsUpdating.setValue(false);
     }
 
     public LiveData<Boolean> getIsLoading(){

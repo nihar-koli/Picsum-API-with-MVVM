@@ -53,7 +53,7 @@ public class ShowImagesRepository {
 
         try {
 
-            result = task.execute("https://picsum.photos/v2/list?page="+String.valueOf(pageno) +"&limit=200").get();
+            result = task.execute("https://picsum.photos/v2/list?page="+String.valueOf(pageno) +"&limit=50").get();
             Log.d(TAG, "initImageBitmaps: download done");
 
             JSONArray array = new JSONArray(result);

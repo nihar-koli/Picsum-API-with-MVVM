@@ -1,6 +1,7 @@
 package com.example.recyclerviewdemo;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,10 +20,12 @@ import android.widget.Toast;
 import com.example.recyclerviewdemo.adapters.RecyclerViewAdapter;
 import com.example.recyclerviewdemo.models.ShowImage;
 import com.example.recyclerviewdemo.viewmodels.MainActivityViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.cert.TrustAnchor;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +33,11 @@ public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = "MainActivity";
 
-    public RelativeLayout relativeLayout;
+    private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private MainActivityViewModel mMainActivityViewModel;
+    private FloatingActionButton nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +47,11 @@ public class MainActivity extends AppCompatActivity{
         setTitle("Picsum");
         Log.d(TAG, "onCreate: started");
 
-        relativeLayout = findViewById(R.id.progressLayout);
+        progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
+        nextButton = findViewById(R.id.nextButton);
+
+        nextButton.setEnabled(true);
 
         mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
@@ -56,36 +64,29 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-
-        initRecyclerView();
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-
-            }
-
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (!recyclerView.canScrollVertically(1)) {
-                    //Toast.makeText(MainActivity.this, "Last", Toast.LENGTH_LONG).show();
-                    mMainActivityViewModel.loadMore();
-                }
-            }
-        });
-
         mMainActivityViewModel.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(!aBoolean){
-                    recyclerView.smoothScrollToPosition(mMainActivityViewModel.getShowImages().getValue().size()-1);
+                if(aBoolean){
+                    showProgressBar();
+                }else{
+                    hideProgressBar();
+                    recyclerViewAdapter.notifyDataSetChanged();
+
                 }
             }
         });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextButton.setEnabled(false);
+                mMainActivityViewModel.loadMore();
+                nextButton.setEnabled(true);
+            }
+        });
+
+        initRecyclerView();
     }
 
     public void initRecyclerView(){
@@ -98,10 +99,10 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void hideProgressBar(){
-        //relativeLayout.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 
     public void showProgressBar(){
-        //relativeLayout.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 }
