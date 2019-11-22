@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = "MainActivity";
 
-    private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private MainActivityViewModel mMainActivityViewModel;
