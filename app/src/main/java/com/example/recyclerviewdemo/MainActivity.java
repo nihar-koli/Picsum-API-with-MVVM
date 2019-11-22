@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private MainActivityViewModel mMainActivityViewModel;
-    private FloatingActionButton nextButton;
+    private int page=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +49,7 @@ public class MainActivity extends AppCompatActivity{
 
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
-        nextButton = findViewById(R.id.nextButton);
 
-        nextButton.setEnabled(true);
 
         mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
@@ -64,6 +62,27 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
+        initRecyclerView();
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    page++;
+                    Toast.makeText(MainActivity.this, "Page "+page+" :-", Toast.LENGTH_LONG).show();
+                    mMainActivityViewModel.loadMore();
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+
         mMainActivityViewModel.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -72,21 +91,12 @@ public class MainActivity extends AppCompatActivity{
                 }else{
                     hideProgressBar();
                     recyclerViewAdapter.notifyDataSetChanged();
-
+                    //recyclerView.smoothScrollToPosition(mMainActivityViewModel.getShowImages().getValue().size()-1);
                 }
             }
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextButton.setEnabled(false);
-                mMainActivityViewModel.loadMore();
-                nextButton.setEnabled(true);
-            }
-        });
 
-        initRecyclerView();
     }
 
     public void initRecyclerView(){

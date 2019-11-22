@@ -14,7 +14,6 @@ import java.util.List;
 public class MainActivityViewModel extends ViewModel {
 
     private MutableLiveData<List<ShowImage>> mShowImages;
-    private MutableLiveData<List<ShowImage>> currentImages;
     private ShowImagesRepository mRepo;
     private MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
 
@@ -31,8 +30,7 @@ public class MainActivityViewModel extends ViewModel {
     public void loadMore(){
         mIsUpdating.setValue(true);
         mRepo = ShowImagesRepository.getInstance();
-        currentImages = mRepo.getShowImagesList();
-        mShowImages = currentImages;
+        mShowImages = mRepo.getShowImagesList();
         mIsUpdating.setValue(false);
     }
 
