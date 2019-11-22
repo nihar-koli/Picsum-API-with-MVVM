@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity{
         setTitle("Picsum Wallpapers");
         Log.d(TAG, "onCreate: started");
 
-        progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
 
         mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
