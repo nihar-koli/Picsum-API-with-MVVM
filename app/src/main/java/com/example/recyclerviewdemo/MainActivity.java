@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity{
         progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
 
-
         mMainActivityViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
 
         mMainActivityViewModel.init();

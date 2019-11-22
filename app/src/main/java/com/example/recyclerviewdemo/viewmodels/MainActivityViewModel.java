@@ -1,7 +1,5 @@
 package com.example.recyclerviewdemo.viewmodels;
 
-import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
