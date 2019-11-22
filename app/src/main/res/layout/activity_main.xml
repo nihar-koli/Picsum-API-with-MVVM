@@ -19,15 +19,4 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="center" />
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
