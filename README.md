@@ -19,5 +19,6 @@ https://picsum.photos/
 https://github.com/bumptech/glide
 
 4. Paging :- To show images in from of pages(As you scorll down new images will load in paging manner).
+Limit(manual) = 50 Images Per Page.
 
 4. Activity lifecycle :- https://developer.android.com/guide/components/activities/activity-lifecycle
