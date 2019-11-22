@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private MainActivityViewModel mMainActivityViewModel;
-    private int page=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity{
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1)) {
-                    page++;
                     Toast.makeText(MainActivity.this, "Next Page :-", Toast.LENGTH_LONG).show();
                     mMainActivityViewModel.loadMore();
                 }
