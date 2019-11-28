@@ -1,26 +1,23 @@
 package com.example.recyclerviewdemo.repositories;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.RelativeLayout;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.recyclerviewdemo.models.ShowImage;
+import com.example.recyclerviewdemo.requests.PicsumApi;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShowImagesRepository {
 
@@ -29,6 +26,7 @@ public class ShowImagesRepository {
 
     private static ShowImagesRepository instance;
     private ArrayList<ShowImage> dataset = new ArrayList<>();
+    MutableLiveData<List<ShowImage>> data;
 
     public static ShowImagesRepository getInstance(){
         if(instance == null ){
@@ -39,14 +37,41 @@ public class ShowImagesRepository {
 
     public MutableLiveData<List<ShowImage>> getShowImagesList(){
         pageno = pageno + 1;
-//        setShowImages(pageno);
-
+        setShowImages(pageno);
         MutableLiveData<List<ShowImage>> data = new MutableLiveData<List<ShowImage>>();
         data.setValue(dataset);
         return data;
+
+
+/*        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://picsum.photos/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PicsumApi picsumApi = retrofit.create(PicsumApi.class);
+
+        Call<List<ShowImage>> call = picsumApi.getImages();
+
+        call.enqueue(new Callback<List<ShowImage>>() {
+            @Override
+            public void onResponse(Call<List<ShowImage>> call, Response<List<ShowImage>> response) {
+                if(!response.isSuccessful()){
+                    Log.d(TAG, "onResponse: failure http 404" + response.message());
+                }
+
+                data = new MutableLiveData<List<ShowImage>>();
+                data.setValue(dataset);
+            }
+
+            @Override
+            public void onFailure(Call<List<ShowImage>> call, Throwable t) {
+
+            }
+        });
+        return data;
+*/
     }
 
-/*
     private void setShowImages(int pageno) {
 
         DownloadImageList task = new DownloadImageList();
@@ -72,9 +97,6 @@ public class ShowImagesRepository {
         }
 
     }
-
-
- */
 }
 
 
