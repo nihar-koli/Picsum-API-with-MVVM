@@ -26,7 +26,6 @@ public class ShowImagesRepository {
 
     private static ShowImagesRepository instance;
     private ArrayList<ShowImage> dataset = new ArrayList<>();
-    MutableLiveData<List<ShowImage>> data;
 
     public static ShowImagesRepository getInstance(){
         if(instance == null ){
