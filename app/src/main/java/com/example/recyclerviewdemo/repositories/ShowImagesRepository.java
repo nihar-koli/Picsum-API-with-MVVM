@@ -39,13 +39,14 @@ public class ShowImagesRepository {
 
     public MutableLiveData<List<ShowImage>> getShowImagesList(){
         pageno = pageno + 1;
-        setShowImages(pageno);
+//        setShowImages(pageno);
+
         MutableLiveData<List<ShowImage>> data = new MutableLiveData<List<ShowImage>>();
         data.setValue(dataset);
         return data;
     }
 
-
+/*
     private void setShowImages(int pageno) {
 
         DownloadImageList task = new DownloadImageList();
@@ -71,6 +72,9 @@ public class ShowImagesRepository {
         }
 
     }
+
+
+ */
 }
 
 

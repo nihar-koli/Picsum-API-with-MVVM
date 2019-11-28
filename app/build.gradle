@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     //recyclerview
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
     // For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:$recyclerview_version"
 
@@ -48,4 +48,7 @@ dependencies {
     //support design dependency
     implementation "com.android.support:design:29.0.0"
 
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
 }
